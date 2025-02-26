@@ -10,6 +10,8 @@ import androidx.navigation.navArgument
 import com.example.myapplication.BlogViewModel
 import com.example.myapplication.ui.screens.BlogListScreen
 import com.example.myapplication.ui.screens.BlogDetailScreen
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun AppNavigation(blogViewModel: BlogViewModel, contentPadding: PaddingValues) {
@@ -17,13 +19,14 @@ fun AppNavigation(blogViewModel: BlogViewModel, contentPadding: PaddingValues) {
 
     NavHost(navController, startDestination = "blogList") {
         composable("blogList") {
-            BlogListScreen(navController, blogViewModel, contentPadding)
+            BlogListScreen(navController, blogViewModel, contentPadding) // ✅ Blog List
         }
         composable(
             "blogDetail/{blogUrl}",
             arguments = listOf(navArgument("blogUrl") { type = NavType.StringType })
         ) { backStackEntry ->
-            BlogDetailScreen(blogUrl = backStackEntry.arguments?.getString("blogUrl") ?: "")
+            val encodedUrl = backStackEntry.arguments?.getString("blogUrl") ?: ""
+            BlogDetailScreen(encodedUrl)
         }
     }
 }

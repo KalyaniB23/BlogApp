@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.screens
 
 import android.text.Html
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.myapplication.BlogViewModel
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun BlogListScreen(navController: NavController, viewModel: BlogViewModel, contentPadding: PaddingValues) {
@@ -19,7 +22,9 @@ fun BlogListScreen(navController: NavController, viewModel: BlogViewModel, conte
     LazyColumn(modifier = Modifier.fillMaxSize().padding(contentPadding)) {
         items(blogs) { blog ->
             BlogItem(blog.title.rendered, blog.link) { url ->
-                navController.navigate("blogDetail/$url")
+                val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString()) // ✅ Encode URL
+                Log.d("BlogNavigation", "Navigating to URL: $encodedUrl")
+                navController.navigate("blogDetail/$encodedUrl") // ✅ Pass blog URL on click
             }
         }
     }
@@ -32,6 +37,6 @@ fun BlogItem(title: String, url: String, onClick: (String) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { onClick(url) }
+            .clickable { onClick(url) } // ✅ Open blog in WebView on click
     )
 }
