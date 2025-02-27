@@ -23,10 +23,10 @@ fun BlogDetailScreen(blogUrl: String) {
             modifier = Modifier.fillMaxSize(),
             factory = { context ->
                 WebView(context).apply {
-                    settings.javaScriptEnabled = true // ✅ Enable JavaScript
-                    settings.domStorageEnabled = true // ✅ Enable local storage
-                    webViewClient = WebViewClient() // ✅ Open links inside WebView
-                    loadUrl(decodedUrl) // ✅ Load the blog URL
+                    settings.javaScriptEnabled = true
+                    settings.domStorageEnabled = true
+                    webViewClient = WebViewClient()
+                    loadUrl(decodedUrl)
                 }
             }
         )

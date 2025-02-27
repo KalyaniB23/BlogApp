@@ -73,11 +73,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    // Retrofit for API calls
+    // Retrofit
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
 
-    // Image loading
     implementation(libs.coil.compose)
 
     implementation(libs.converter.gson)

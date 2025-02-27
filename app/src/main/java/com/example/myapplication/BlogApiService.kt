@@ -9,6 +9,9 @@ interface BlogApiService {
     suspend fun getBlogPosts(
         @Query("per_page") perPage: Int = 10,
         @Query("page") page: Int = 1
+
 //    ): List<BlogPost>
+
+
     ): Response<List<BlogPost>>
 }

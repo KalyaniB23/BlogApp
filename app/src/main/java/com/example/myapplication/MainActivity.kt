@@ -19,23 +19,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // ✅ Step 1: Create Retrofit Instance
+        //Retrofit..
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://blog.vrid.in/") // ✅ Replace with actual API URL
+            .baseUrl("https://blog.vrid.in/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // ✅ Step 2: Create API Service
         val apiService = retrofit.create(BlogApiService::class.java)
 
-        // ✅ Step 3: Create Repository
         val blogRepository = BlogRepository(apiService)
 
-        // ✅ Step 4: Create ViewModel using Factory
         val blogViewModel = ViewModelProvider(this, BlogViewModelFactory(blogRepository))
             .get(BlogViewModel::class.java)
 
-        // ✅ Step 5: Set Content
         setContent {
             MyApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
